@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useLoader, useThree } from '@react-three/fiber';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import { OrbitControls } from '@react-three/drei';
+import { ThreeEvent } from '@react-three/fiber/dist/declarations/src/core/events';
 
 interface AnchorPoint {
   position: [number, number, number];
@@ -35,7 +36,7 @@ const PlaguePillar = () => {
   
 
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
+  const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     onImageClick(index);
   };
@@ -61,7 +62,7 @@ const PlaguePillar = () => {
           key={index}
           position={anchorPoints[index].position}
           rotation={anchorPoints[index].rotation}
-          onClick={(event) => handleClick(event.nativeEvent, index)}
+          onClick={(event) => handleClick(event, index)}
           onPointerOver={() => {
             document.body.style.cursor = "pointer";
           }}
