@@ -1,4 +1,12 @@
 import './globals.css'
+import { Teko as Display} from 'next/font/google'
+
+const display = Display({
+  subsets: ['latin'],
+  weight: "600",
+  variable: '--font-display',
+})
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${display.variable} font-sans`}>
       <body>{children}</body>
     </html>
   )

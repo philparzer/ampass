@@ -90,9 +90,12 @@ const PlagueCanvas = () => {
   return (
     <div className="flex w-[100vw] justify-center relative min-h-sceen" onContextMenu={onCanvasContextMenu}>
         
-      <Canvas className="">
+      <Canvas className="relative z-10">
         <PlaguePillar />
       </Canvas>
+      <div className="absolute w-full h-full flex justify-center items-center">
+        <h1 className="font-display text-[180px] rotate-[67deg] translate-y-10 pb-[15vw] text-slate-200">am pass</h1>
+      </div>
     </div>
     
   );
