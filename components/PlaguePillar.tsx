@@ -1,34 +1,27 @@
 "use client";
 
+import { Fragment, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, useThree } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, Text } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events";
+import { projects } from "../data/projects";
+
 
 interface AnchorPoint {
   position: [number, number, number];
   rotation: [number, number, number];
 }
 
-const imageUrls = [
-  "/positive-person.avif",
-  "/positive-person.avif",
-  "/positive-person.avif",
-  "/positive-person.avif",
-];
-
 const degToRad = (angle: number) => angle * (Math.PI / 180);
 
 const PlaguePillar = () => {
-  const gltf = useLoader(GLTFLoader, "models/ampass-decimated-origin-set.glb");
-  const textures = useLoader(TextureLoader, imageUrls);
+  const gltf = useLoader(GLTFLoader, "models/pillar.glb");
+  const textures = useLoader(TextureLoader, projects.map((project) => project.asset));
   const { size, camera } = useThree();
-
-  const onImageClick = (index: number) => {
-    console.log(index);
-  };
+  const [ descriptionShown, setDescriptionShown ] = useState<number>();
 
   let scale =
     (Math.min(size.width, size.height) /
@@ -37,7 +30,7 @@ const PlaguePillar = () => {
 
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
-    onImageClick(index);
+    window.open(projects[index].link, "_blank");
   };
 
   const anchorPoints: AnchorPoint[] | [] = [
@@ -62,21 +55,39 @@ const PlaguePillar = () => {
       <pointLight position={[-10, 10, -10]} intensity={0.4} />
       <primitive object={gltf.scene} />
       {textures.map((texture, index) => (
+        <Fragment key={index}>
         <mesh
-          key={index}
           position={anchorPoints[index].position}
           rotation={anchorPoints[index].rotation}
           onClick={(event) => handleClick(event, index)}
           onPointerOver={() => {
             document.body.style.cursor = "pointer";
+            setDescriptionShown(index);
           }}
           onPointerOut={() => {
             document.body.style.cursor = "auto";
+            setDescriptionShown(undefined);
           }}
         >
           <planeBufferGeometry args={[1, 1]} />
-          <meshBasicMaterial map={texture} color="#A5A5A5"></meshBasicMaterial>
+          <meshBasicMaterial map={texture} color="#B3B3B3"></meshBasicMaterial>
         </mesh>
+        {descriptionShown === index && (
+        <Text
+        position={[anchorPoints[index].position[0], anchorPoints[index].position[1] - 1.5, anchorPoints[index].position[2] + 0.05]}
+        rotation={[anchorPoints[index].rotation[0], anchorPoints[index].rotation[1], degToRad(-90)]}
+        fontSize={.3}
+        color="#080A0F"
+        maxWidth={10}
+        lineHeight={1}
+        textAlign="left"
+        anchorX="left"
+        anchorY="middle"
+        font="/IBMPlexMono-Medium.ttf"
+      >
+        {projects[index].name} →</Text>
+      )}
+      </Fragment>
       ))}
     </group>
   );
@@ -100,6 +111,7 @@ const PlagueCanvas = () => {
           am pass
         </h1>
       </div>
+      
     </div>
   );
 };
