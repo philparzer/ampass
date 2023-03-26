@@ -70,7 +70,7 @@ const PlaguePillar = () => {
           }}
         >
           <planeBufferGeometry args={[1, 1]} />
-          <meshBasicMaterial map={texture} color="#B3B3B3"></meshBasicMaterial>
+          <meshBasicMaterial map={texture} color="#B3B3B3" transparent></meshBasicMaterial>
         </mesh>
         {descriptionShown === index && (
         <Text
