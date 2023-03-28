@@ -3,11 +3,12 @@
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useLoader, useThree } from "@react-three/fiber";
+import { useLoader, useThree, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { OrbitControls, Text } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events";
 import { projects } from "../data/projects";
+import { Group, Vector3 } from "three";
 
 
 interface AnchorPoint {
@@ -23,22 +24,27 @@ interface PlaguePillarProps {
   orbitalsEnabled: boolean;
 }
 
-const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
+// const randProjects = projects.sort(() => Math.random() - 0.5);
+
+const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(TextureLoader, projects.map((project) => project.asset));
-  const { size } = useThree();
-  const [ descriptionShown, setDescriptionShown ] = useState<number>();
+  const { size, camera } = useThree();
+  const [descriptionShown, setDescriptionShown] = useState<number>();
 
+  // Scale the pillar based on the window size
   let scale =
     (Math.min(size.width, size.height) /
       Math.min(window.innerWidth, window.innerHeight)) *
     0.4;
 
+  // Handles clicking on a pillar
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     window.open(projects[index].link, "_blank");
   };
 
+  // Define the anchor points for each pillar
   const anchorPoints: AnchorPoint[] | [] = [
     { position: [0, 1.8, 0.8], rotation: [0, 0, 0] },
     { position: [0.8, 1.8, 0], rotation: [0, degToRad(90), 0] },
@@ -46,16 +52,51 @@ const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
     { position: [-0.8, 1.8, 0], rotation: [0, degToRad(270), 0] },
   ];
 
+  const groupRef = useRef<Group>(null);
+
+  useFrame(() => { //set project description based on camera angle
+    if (!groupRef.current) return;
+    
+    // get the angle between the camera and the pillar
+    const azimuthAngle = Math.atan2(camera.position.x - groupRef.current.position.x, camera.position.z - groupRef.current.position.z);
+    
+      if (azimuthAngle >= -1 && azimuthAngle <= 0.9) {
+        if (descriptionShown !== 0) {
+          setDescriptionShown(0);
+        }
+      }
+
+      else if (azimuthAngle >= 0.8 && azimuthAngle <= 2.1) {
+        if (descriptionShown !== 1) {
+          setDescriptionShown(1);
+        }
+      }
+
+      else if (azimuthAngle >= 2.2 || azimuthAngle <= -2.3) {
+        if (descriptionShown !== 2) {
+          setDescriptionShown(2);
+        }
+      }
+
+      else {
+        if (descriptionShown !== 3) {
+          setDescriptionShown(3);
+        }
+      }
+  });
+
   return (
-    <group scale={scale} rotation={[degToRad(10), degToRad(-4), degToRad(22)]}>
+    <group scale={scale} ref={groupRef} rotation={[degToRad(10), degToRad(-4), degToRad(22)]}>
+      {/* Disable orbit controls if orbitals are enabled */}
       <OrbitControls
         enableZoom={false}
         enablePan={false}
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
-        dampingFactor={0.001}
+        dampingFactor={0.005}
         enableDamping={true}
         enabled={!orbitalsEnabled}
+       
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.4} />
@@ -63,22 +104,24 @@ const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
       <primitive object={gltf.scene} />
       {textures.map((texture, index) => (
         <Fragment key={index}>
-        <mesh
-          position={anchorPoints[index].position}
-          rotation={anchorPoints[index].rotation}
-          onClick={(event) => handleClick(event, index)}
-          onPointerOver={() => {
-            document.body.style.cursor = "pointer";
-            setDescriptionShown(index);
-          }}
-          onPointerOut={() => {
-            document.body.style.cursor = "auto";
-            setDescriptionShown(undefined);
-          }}
-        >
-          <planeBufferGeometry args={[1, 1]} />
-          <meshBasicMaterial map={texture} color="#B3B3B3" transparent></meshBasicMaterial>
-        </mesh>
+          {/* Create a mesh for each pillar */}
+          <mesh
+            position={anchorPoints[index].position}
+            rotation={anchorPoints[index].rotation}
+            onClick={(event) => handleClick(event, index)}
+            onPointerOver={() => {
+              document.body.style.cursor = "pointer";
+             
+            }}
+            onPointerOut={() => {
+              document.body.style.cursor = "auto";
+              
+            }}
+          >
+            <planeBufferGeometry args={[1, 1]} />
+            <meshBasicMaterial map={texture} color="#B3B3B3" transparent></meshBasicMaterial>
+          </mesh>
+          {/* Show the project name when hovering over a pillar */}
         {descriptionShown === index && (
         <Text
         position={[anchorPoints[index].position[0], anchorPoints[index].position[1] - 1.5, anchorPoints[index].position[2] + 0.05]}
@@ -92,7 +135,7 @@ const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
         anchorY="middle"
         font="/IBMPlexMono-Medium.ttf"
       >
-        {projects[index].name} →</Text>
+        ← {projects[index].name} </Text>
       )}
       </Fragment>
       ))}
@@ -129,10 +172,10 @@ const PlagueCanvas = () => {
       // If the delta in the X direction is greater than the delta in the Y direction,
       // treat it as a horizontal scroll and disable canvas scrolling
       if (deltaX > deltaY) {
-        console.log("horizontal scroll")
+        
         setScrolling(false); // horizontal scroll, use OrbitControls
       } else {
-        console.log("vertical scroll")
+       
 
         // Get the top and bottom coordinates of the canvas element
         const canvasTop = canvasRef.current?.getBoundingClientRect().top ?? 0 + window.scrollY;
