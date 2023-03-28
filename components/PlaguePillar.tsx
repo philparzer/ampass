@@ -26,7 +26,7 @@ interface PlaguePillarProps {
 const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(TextureLoader, projects.map((project) => project.asset));
-  const { size, camera } = useThree();
+  const { size } = useThree();
   const [ descriptionShown, setDescriptionShown ] = useState<number>();
 
   let scale =
@@ -105,46 +105,64 @@ const PlagueCanvas = () => {
     event.stopPropagation();
   };
 
+  // Reference to the canvas element
+  const canvasRef = useRef<HTMLDivElement>(null);
 
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Track the initial touch coordinates
   const [initialTouch, setInitialTouch] = useState({ x: 0, y: 0 });
+
+  // Whether or not the canvas is currently being scrolled
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
     const handleTouchStart = (event: TouchEvent) => {
+      // Set the initial touch coordinates on touch start
       setInitialTouch({ x: event.touches[0].clientX, y: event.touches[0].clientY });
     };
 
     const handleTouchMove = (event: TouchEvent) => {
+      // Get the current touch coordinates and calculate the delta
       const currentTouch = { x: event.touches[0].clientX, y: event.touches[0].clientY };
       const deltaX = Math.abs(currentTouch.x - initialTouch.x);
       const deltaY = Math.abs(currentTouch.y - initialTouch.y);
 
+      // If the delta in the X direction is greater than the delta in the Y direction,
+      // treat it as a horizontal scroll and disable canvas scrolling
       if (deltaX > deltaY) {
         console.log("horizontal scroll")
         setScrolling(false); // horizontal scroll, use OrbitControls
       } else {
         console.log("vertical scroll")
 
+        // Get the top and bottom coordinates of the canvas element
         const canvasTop = canvasRef.current?.getBoundingClientRect().top ?? 0 + window.scrollY;
+        const canvasBottom = canvasRef.current?.getBoundingClientRect().bottom ?? 0 + window.scrollY;
 
-        if (window.scrollY > canvasTop) {//scroll to top
-          window.scrollTo({ top: canvasTop, behavior: 'smooth' });
+        // Check if the canvas is currently in view
+        const isCanvasInView = window.scrollY >= canvasTop && window.scrollY < canvasBottom;
+
+        // If the canvas is not in view, do nothing
+        if (!isCanvasInView) {
+          return;
         }
 
-        else {//scroll to bottom
-        window.scrollTo({
-          top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
-          behavior: "smooth",
-        });
-      }
-      
+        // If the scroll direction is down, scroll to the bottom of the canvas
+        if (window.scrollY > canvasTop) {//scroll to top
+          window.scrollTo({ top: canvasTop, behavior: 'smooth' });
+        } else { // If the scroll direction is up, scroll to the top of the canvas
+          window.scrollTo({
+            top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
+            behavior: "smooth",
+          });
+        }
       }
     };
 
+    // Add touch event listeners on component mount
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
 
+    // Remove touch event listeners on component unmount
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
@@ -155,12 +173,13 @@ const PlagueCanvas = () => {
     <div
       className="flex w-[100vw] justify-center relative min-h-sceen"
       onContextMenu={onCanvasContextMenu}
+      ref={canvasRef}
     >
-      <Canvas className="relative z-10" style={{pointerEvents: scrolling ? "none" : "auto"}} ref={canvasRef}>
+      <Canvas className="relative z-10 -translate-y-[7vh] -translate-x-[3vw] md:translate-x-0 md:translate-y-0" style={{pointerEvents: scrolling ? "none" : "auto"}}>
         <PlaguePillar orbitalsEnabled={scrolling} />
       </Canvas>
-      <div className="absolute w-full h-full flex justify-center items-center">
-        <h1 className="font-display font-var-heading tracking-tight text-[70px] md:text-[110px] rotate-[67deg] translate-y-10 pb-[250px] text-slate-200">
+      <div className="absolute w-full h-full flex justify-center items-center -translate-x-[3vw] md:translate-x-0 -translate-y-[7vh] md:translate-y-0">
+        <h1 className="font-display font-var-heading tracking-tight text-[70px] md:text-[110px] rotate-[67deg] translate-y-10 pb-[220px] md:pb-[250px] text-slate-200">
           am pass
         </h1>
       </div>
