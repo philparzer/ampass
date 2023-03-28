@@ -7,7 +7,7 @@ export default function Home() {
       <div className="min-h-[100vh] flex relative">
       <PlaguePillar />
       </div>
-      
+      <div className="h-[200px] bg-red-200">hi</div>
     </main>
   )
 }

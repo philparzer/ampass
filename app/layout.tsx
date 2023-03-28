@@ -1,10 +1,10 @@
 import './globals.css'
-import { Teko as Display} from 'next/font/google'
+import { Roboto_Flex as Display} from 'next/font/google'
 
 const display = Display({
   subsets: ['latin'],
-  weight: "600",
   variable: '--font-display',
+  axes: ['GRAD', 'slnt', 'XTRA', 'YOPQ', 'YTLC', 'YTUC', 'YTAS', 'YTDE', 'YTFI', 'opsz']
 })
 
 

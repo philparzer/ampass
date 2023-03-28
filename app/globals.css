@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .font-var-heading {
+        font-variation-settings: 'wght' 900, 'GRAD' 0, 'slnt' 0, 'XTRA' 573, 'XOPQ' 96, 'YOPQ' 79, 'YTLC' 514, 'YTUC' 683, 'YTAS' 750, 'YTDE' -203, 'YTFI' 738, 'opsz' 25;
+    }
+}

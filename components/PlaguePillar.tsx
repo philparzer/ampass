@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, useThree } from "@react-three/fiber";
@@ -13,11 +13,17 @@ import { projects } from "../data/projects";
 interface AnchorPoint {
   position: [number, number, number];
   rotation: [number, number, number];
+
 }
 
 const degToRad = (angle: number) => angle * (Math.PI / 180);
 
-const PlaguePillar = () => {
+
+interface PlaguePillarProps {
+  orbitalsEnabled: boolean;
+}
+
+const PlaguePillar = ({orbitalsEnabled} : PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(TextureLoader, projects.map((project) => project.asset));
   const { size, camera } = useThree();
@@ -49,6 +55,7 @@ const PlaguePillar = () => {
         maxPolarAngle={Math.PI / 2}
         dampingFactor={0.001}
         enableDamping={true}
+        enabled={!orbitalsEnabled}
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.4} />
@@ -98,20 +105,65 @@ const PlagueCanvas = () => {
     event.stopPropagation();
   };
 
+
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [initialTouch, setInitialTouch] = useState({ x: 0, y: 0 });
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleTouchStart = (event: TouchEvent) => {
+      setInitialTouch({ x: event.touches[0].clientX, y: event.touches[0].clientY });
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      const currentTouch = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      const deltaX = Math.abs(currentTouch.x - initialTouch.x);
+      const deltaY = Math.abs(currentTouch.y - initialTouch.y);
+
+      if (deltaX > deltaY) {
+        console.log("horizontal scroll")
+        setScrolling(false); // horizontal scroll, use OrbitControls
+      } else {
+        console.log("vertical scroll")
+
+        const canvasTop = canvasRef.current?.getBoundingClientRect().top ?? 0 + window.scrollY;
+
+        if (window.scrollY > canvasTop) {//scroll to top
+          window.scrollTo({ top: canvasTop, behavior: 'smooth' });
+        }
+
+        else {//scroll to bottom
+        window.scrollTo({
+          top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
+          behavior: "smooth",
+        });
+      }
+      
+      }
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [initialTouch]);
+
   return (
     <div
       className="flex w-[100vw] justify-center relative min-h-sceen"
       onContextMenu={onCanvasContextMenu}
     >
-      <Canvas className="relative z-10">
-        <PlaguePillar />
+      <Canvas className="relative z-10" style={{pointerEvents: scrolling ? "none" : "auto"}} ref={canvasRef}>
+        <PlaguePillar orbitalsEnabled={scrolling} />
       </Canvas>
       <div className="absolute w-full h-full flex justify-center items-center">
-        <h1 className="font-display text-[140px] md:text-[180px] rotate-[67deg] translate-y-10 pb-[200px] md:pb-[250px] text-slate-200">
+        <h1 className="font-display font-var-heading tracking-tight text-[70px] md:text-[110px] rotate-[67deg] translate-y-10 pb-[250px] text-slate-200">
           am pass
         </h1>
       </div>
-      
     </div>
   );
 };
