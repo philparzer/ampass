@@ -173,9 +173,6 @@ const PlagueCanvas = () => {
       const deltaX = Math.abs(currentTouch.x - initialTouch.x);
       const deltaY = Math.abs(currentTouch.y - initialTouch.y);
 
-      console.log(deltaY > 300)
-      console.log("deltaY: " + deltaY)
-
       // If the delta in the X direction is greater than the delta in the Y direction,
       // treat it as a horizontal scroll and disable canvas scrolling
       if (deltaX > deltaY) {
@@ -199,8 +196,10 @@ const PlagueCanvas = () => {
         }
 
         
-        //scroll to bottom of canvas
-        if (window.scrollY < canvasTop) {
+        // If the scroll direction is down, scroll to the bottom of the canvas
+        if (window.scrollY >= canvasTop) {//scroll to top
+          return;
+        } else { // If the scroll direction is up, scroll to the bottom
           window.scroll({
             top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
             behavior: isIos ? "auto" : "smooth"
