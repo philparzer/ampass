@@ -161,8 +161,6 @@ const PlagueCanvas = () => {
   // Whether or not the canvas is currently being scrolled
   const [scrolling, setScrolling] = useState(false);
 
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-
   useEffect(() => {
     const handleTouchStart = (event: TouchEvent) => {
       // Set the initial touch coordinates on touch start
@@ -201,17 +199,13 @@ const PlagueCanvas = () => {
         }
 
         
-        const currentScrollPos = window.scrollY;
-        if (currentScrollPos >= prevScrollPos) {
-          // If the current position is greater than the previous position, the user is scrolling down
-          window.scrollTo({ top: canvasBottom, behavior: isIos ? "auto" : "smooth" });
-        } else if (currentScrollPos < prevScrollPos) {
-          // If the current position is less than the previous position, the user is scrolling up
-          // Do nothing, since you don't want to scroll up
+        //scroll to bottom of canvas
+        if (window.scrollY < canvasTop) {
+          window.scroll({
+            top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
+            behavior: isIos ? "auto" : "smooth"
+          });
         }
-
-        // Set the previous scroll position to the current position
-        setPrevScrollPos(currentScrollPos);
       }
     };
 
