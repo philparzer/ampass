@@ -15,8 +15,9 @@ export default function Home() {
         <section className="flex justify-center grow items-center mb-40 px-[5vw]">
           <ApplyForm />
         </section>
+        <Footer />
       </div>
-      <Footer />
+      
     </main>
   )
 }

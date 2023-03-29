@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="h-[25px] absolute bottom-0 gap-[5vw] px-[5vw]  md:px-[40px] md:gap-[2vw] bg-lagoon w-full flex justify-end items-center text-white text-sm font-body">
-      <Link href="/about">Über Uns </Link>
-      <Link href="/dsgvo">DSGVO </Link>
-      <Link href="/imprint">Impressum </Link>
-      <a>
+    <footer className="h-[25px] absolute bottom-0 px-[5vw]  md:px-[40px] bg-lagoon w-full flex justify-end items-center text-white text-sm font-body">
+      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="/about">Über Uns </Link>
+      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px[" href="/dsgvo">DSGVO </Link>
+      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="/imprint">Impressum </Link>
+      <a className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="https://github.com/philparzer/ampass" target="_blank" rel="noopener noreferrer">
         <svg
           width="18"
           height="19"
