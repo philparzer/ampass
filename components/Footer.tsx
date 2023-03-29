@@ -1,12 +1,20 @@
 import Link from "next/link";
 
-export default function Footer() {
+interface Props {
+  hasHomeButton?: boolean;
+}
+
+export default function Footer({hasHomeButton}:Props) {
   return (
-    <footer className="h-[25px] absolute bottom-0 px-[5vw]  md:px-[40px] bg-lagoon w-full flex justify-end items-center text-white text-sm font-body">
-      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="/about">Über Uns </Link>
-      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px[" href="/dsgvo">DSGVO </Link>
-      <Link className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="/imprint">Impressum </Link>
-      <a className="transition-color hover:bg-[#34B6FF] h-full flex items-center px-[3vw] md:px-[20px]" href="https://github.com/philparzer/ampass" target="_blank" rel="noopener noreferrer">
+    <footer className={`h-[25px] absolute bottom-0 pr-[5vw]  md:pr-[40px] bg-lagoon-500 w-full flex ${hasHomeButton ? "justify-between" : "justify-end"} items-center text-white text-sm font-body`}>
+      { hasHomeButton &&
+      <Link href="/" title="Zurück zur Startseite" className="transition-color bg-scorch-500 hover:bg-scorch-300 h-full flex items-center pl-[2vw] md:pl-[15px] pr-[3vw] md:pr-[20px]">←</Link>
+      }
+      <div className="flex">
+      <Link title="Über Uns" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/about">Über Uns </Link>
+      <Link title="DSGVO" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/dsgvo">DSGVO </Link>
+      <Link title="Impressum" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/imprint">Impressum </Link>
+      <a title="Github, diese Website ist open-source" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="https://github.com/philparzer/ampass" target="_blank" rel="noopener noreferrer">
         <svg
           width="18"
           height="19"
@@ -34,6 +42,7 @@ export default function Footer() {
           </defs>
         </svg>
       </a>
+      </div>
     </footer>
   );
 }

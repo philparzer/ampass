@@ -251,7 +251,7 @@ const PlagueCanvas = () => {
       <motion.div
         className="w-full"
         initial={{ opacity: 0 }}
-        transition={{ delay: 0.1, duration: 0.4, ease: "easeIn" }}
+        transition={{ delay: 0.2, duration: 0.8, ease: "easeIn" }}
         animate={{ opacity: 1 }}
       >
         <Canvas

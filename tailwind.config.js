@@ -18,8 +18,10 @@ module.exports = {
         "body": ['var(--font-body)', ...fontFamily.sans],
       },
       colors: {
-        "lagoon": "#00A8E8",
-        "scorch": "#FF0000",
+        "lagoon-500": "#00A8E8",
+        "scorch-500": "#FF0000",
+        "scorch-300": "#FF3636",
+        "lagoon-300": "#37B7FF",
       }
     },
   },
