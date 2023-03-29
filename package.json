@@ -25,6 +25,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/smoothscroll-polyfill": "^0.3.1",
     "autoprefixer": "^10.4.14",
     "gltfpack": "^0.18.0",
     "postcss": "^8.4.21",

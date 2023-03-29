@@ -5,12 +5,12 @@ import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, useThree, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { OrbitControls, Text, Html, useProgress } from "@react-three/drei";
+import { OrbitControls, Text } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events";
 import { projects } from "../data/projects";
-import { Group, Vector3 } from "three";
+import { Group } from "three";
 import { motion } from "framer-motion";
-
+import useIsIos from "../hooks/useIsIos"
 
 interface AnchorPoint {
   position: [number, number, number];
@@ -116,7 +116,6 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
             }}
             onPointerOut={() => {
               document.body.style.cursor = "auto";
-              
             }}
           >
             <planeBufferGeometry args={[1, 1]} />
@@ -146,14 +145,15 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
 
 
 const PlagueCanvas = () => {
+
+  const isIos = useIsIos();
+
   const onCanvasContextMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
 
   // Reference to the canvas element
   const canvasRef = useRef<HTMLDivElement>(null);
-
-  const [testState, setTestState] = useState<string>()
 
   // Track the initial touch coordinates
   const [initialTouch, setInitialTouch] = useState({ x: 0, y: 0 });
@@ -197,15 +197,12 @@ const PlagueCanvas = () => {
 
         
         // If the scroll direction is down, scroll to the bottom of the canvas
-
-        
-
         if (window.scrollY > canvasTop) {//scroll to top
-          window.scrollTo({ top: canvasTop, behavior: 'smooth' });
-        } else { // If the scroll direction is up, scroll to the top of the canvas
-          window.scrollTo({
+          return;
+        } else { // If the scroll direction is up, scroll to the bottom
+          window.scroll({
             top: canvasRef.current?.getBoundingClientRect().bottom ?? 0,
-            behavior: "auto"
+            behavior: isIos ? "auto" : "smooth"
           });
         }
       }
@@ -238,7 +235,7 @@ const PlagueCanvas = () => {
       </motion.div>
       <div className="absolute w-full h-full flex justify-center items-center -translate-x-[3vw] md:translate-x-0 -translate-y-[7vh] md:translate-y-0">
         <h1 className="font-display font-var-heading tracking-tight text-[70px] leading-[50px] md:[leading-[110px]] md:text-[110px] rotate-[67deg] translate-y-10 pb-[220px] md:pb-[250px] text-slate-200">
-          {JSON.stringify(testState)}
+          am pass
         </h1>
       </div>
     </div>
