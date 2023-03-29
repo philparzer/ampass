@@ -197,7 +197,7 @@ const PlagueCanvas = () => {
 
         
         // If the scroll direction is down, scroll to the bottom of the canvas
-        if (window.scrollY > canvasTop) {//scroll to top
+        if (window.scrollY >= canvasTop) {//scroll to top
           return;
         } else { // If the scroll direction is up, scroll to the bottom
           window.scroll({
