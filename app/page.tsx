@@ -11,7 +11,7 @@ export default function Home() {
           <PlaguePillar />
         
       </div>
-      <div className="min-h-[100vh] relative flex flex-col">
+      <div className="min-h-[80vh] md:min-h-[100vh]  relative flex flex-col">
         <section className="flex justify-center grow items-center mb-40 px-[5vw]">
           <ApplyForm />
         </section>

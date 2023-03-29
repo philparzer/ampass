@@ -12,7 +12,7 @@ export default function ApplyForm() {
                 <div className="">
                     <button className="font-display font-var-heading p-1.5 px-2 bg-scorch rounded-[5px]" onClick={(() => console.log("submit"))}>ANMELDEN</button>
                 </div>
-                <div className="absolute top-8 md:top-0 left-[55%] w-full flex z-0">
+                <div className="absolute hidden md:flex left-[40%] md:left-[55%] w-full z-0">
                     <h3 className="font-display text-[30px] md:text-[60px] font-var-heading">
                         willst rein?
                     </h3>
