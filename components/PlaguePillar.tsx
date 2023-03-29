@@ -1,14 +1,15 @@
 "use client";
 
-import { Fragment, useState, useRef, useEffect } from "react";
+import { Fragment, useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, useThree, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-import { OrbitControls, Text } from "@react-three/drei";
+import { OrbitControls, Text, Html, useProgress } from "@react-three/drei";
 import { ThreeEvent } from "@react-three/fiber/dist/declarations/src/core/events";
 import { projects } from "../data/projects";
 import { Group, Vector3 } from "three";
+import { motion } from "framer-motion";
 
 
 interface AnchorPoint {
@@ -143,6 +144,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   );
 };
 
+
 const PlagueCanvas = () => {
   const onCanvasContextMenu = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -217,12 +219,17 @@ const PlagueCanvas = () => {
       className="flex w-[100vw] justify-center relative min-h-sceen"
       onContextMenu={onCanvasContextMenu}
       ref={canvasRef}
-    >
-      <Canvas className="relative z-10 -translate-y-[7vh] -translate-x-[3vw] md:translate-x-0 md:translate-y-0" style={{pointerEvents: scrolling ? "none" : "auto"}}>
+    > 
+      <motion.div className="w-full" initial={{opacity: 0}} transition={{delay: .1, duration: .4, ease: "easeIn"}} animate={{opacity: 1}}>
+        
+      <Canvas className="relative z-10 -translate-y-[7vh] -translate-x-[3vw] md:translate-x-0 md:translate-y-0" style={{pointerEvents: scrolling ? "none" : "auto"}} fallback={<div className="bg-red-200">hallo</div>}>
+      
         <PlaguePillar orbitalsEnabled={scrolling} />
       </Canvas>
+
+      </motion.div>
       <div className="absolute w-full h-full flex justify-center items-center -translate-x-[3vw] md:translate-x-0 -translate-y-[7vh] md:translate-y-0">
-        <h1 className="font-display font-var-heading tracking-tight text-[70px] md:text-[110px] rotate-[67deg] translate-y-10 pb-[220px] md:pb-[250px] text-slate-200">
+        <h1 className="font-display font-var-heading tracking-tight text-[70px] leading-[50px] md:[leading-[110px]] md:text-[110px] rotate-[67deg] translate-y-10 pb-[220px] md:pb-[250px] text-slate-200">
           am pass
         </h1>
       </div>

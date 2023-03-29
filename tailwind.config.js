@@ -15,7 +15,12 @@ module.exports = {
     extend: {
       fontFamily: {
         "display": ['var(--font-display)', ...fontFamily.sans],
+        "body": ['var(--font-body)', ...fontFamily.sans],
       },
+      colors: {
+        "lagoon": "#00A8E8",
+        "scorch": "#FF0000",
+      }
     },
   },
   plugins: [],

@@ -1,10 +1,16 @@
 import './globals.css'
 import { Roboto_Flex as Display} from 'next/font/google'
+import { Roboto_Mono as Body} from 'next/font/google'
 
 const display = Display({
   subsets: ['latin'],
   variable: '--font-display',
   axes: ['GRAD', 'slnt', 'XTRA', 'YOPQ', 'YTLC', 'YTUC', 'YTAS', 'YTDE', 'YTFI', 'opsz']
+})
+
+const body = Body({
+  subsets: ['latin'],
+  variable: '--font-body',
 })
 
 
@@ -19,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${display.variable} font-sans`}>
+    <html lang="en" className={`${display.variable} ${body.variable} font-sans`}>
       <body>{children}</body>
     </html>
   )
