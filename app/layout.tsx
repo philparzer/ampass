@@ -33,7 +33,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} font-sans selection:bg-lagoon`}>
-      <body className="bg-black">{children}</body>
+      <body className="bg-black relative">
+        <div className="top-0 left-[5vw] fixed bg-[#FBFF28] p-1 px-2 font-body text-xs tracking-tighter z-10">under construction</div>
+        {children}
+      </body>
     </html>
   )
 }

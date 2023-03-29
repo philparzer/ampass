@@ -45,7 +45,8 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   // Handles clicking on a pillar
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
-    window.open(projects[index].link, "_blank");
+    //TODO: look into drei HTML ele
+    window.location.href = projects[index].link;
   };
 
   // Define the anchor points for each pillar
@@ -130,7 +131,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
           </mesh>
           {/* Show the project name when hovering over a pillar */}
           {descriptionShown === index && (
-            <Text
+            <Text //TODO: look into drei HTML ele
               position={[
                 anchorPoints[index].position[0],
                 anchorPoints[index].position[1] - 1.5,

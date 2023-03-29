@@ -4,12 +4,12 @@ export const projects = [
     {
         name: 'hydropower by miller',
         asset: '/project-assets/hydropower-by-miller.jpg',
-        link: '/projects/hydropower-by-miller'
+        link: '/projects/hydropower'
     },
     {
         name: 'Tirol 1809',
         asset: '/project-assets/hofer.jpg',
-        link: 'https://www.ampass.at/'
+        link: '/projects/tirol1809',
     },
     {
         name: 'Gutai',
