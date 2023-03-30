@@ -68,7 +68,7 @@
         border-radius: 0;
         box-shadow: none;
         background: black;
-        width: 100%;
+        width: 100%!important;
     }
 }
 

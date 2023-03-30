@@ -12,7 +12,7 @@ interface Props {
     message: React.ReactNode;
 }
 
-export default function ToastClient({message}: Props) {
+export default function ToastProvider({message}: Props) {
   useEffect(() => {
     toast(() => (
       <div className="group">
@@ -53,9 +53,8 @@ export default function ToastClient({message}: Props) {
         hideProgressBar={true}
         newestOnTop={true}
         rtl={false}
-        pauseOnFocusLoss
-        draggable
         pauseOnHover
+        draggable={false}
         theme="dark"
         closeButton={<></>}
         transition={Slide}
