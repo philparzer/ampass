@@ -14,7 +14,7 @@ export default function Footer({hasHomeButton}:Props) {
       <Link title="Über Uns" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/about">Über Uns </Link>
       <Link title="DSGVO" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/dsgvo">DSGVO </Link>
       <Link title="Impressum" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="/imprint">Impressum </Link>
-      <a title="Github, diese Website ist open-source" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[3vw] md:px-[20px]" href="https://github.com/philparzer/ampass" target="_blank" rel="noopener noreferrer">
+      <a title="Github, diese Website ist open-source" className="transition-color hover:bg-lagoon-300 h-full flex items-center px-[5px] md:px-[20px]" href="https://github.com/philparzer/ampass" target="_blank" rel="noopener noreferrer">
         <svg
           width="18"
           height="19"

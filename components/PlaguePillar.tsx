@@ -142,6 +142,13 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
                 anchorPoints[index].rotation[1],
                 degToRad(-90),
               ]}
+              onClick={(event) => handleClick(event, index)}
+              onPointerOver={() => {
+                document.body.style.cursor = "pointer";
+              }}
+              onPointerOut={() => {
+                document.body.style.cursor = "auto";
+              }}
               fontSize={0.3}
               color="#080A0F"
               maxWidth={10}

@@ -14,12 +14,12 @@ export const projects = [
     {
         name: 'Gutai',
         asset: '/project-assets/gutai.webp',
-        link: 'https://gutai.app/'
+        link: 'https://gutai.vercel.app/'
     },
     {
         name: 'Rumschmarrn',
         asset: '/project-assets/rumschmarrn.webp',
-        link: 'https://www.kunsthausgraz.at/'
+        link: 'https://www.rumschmarrn.com/'
     },
 ]
 
