@@ -13,7 +13,6 @@ export default function ApplyForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>();
   const [valid, setValid] = useState<boolean | undefined>();
-  const [loading, setLoading] = useState(false);
 
   const validateEmail = (email: string) => {
     setEmail(email);
