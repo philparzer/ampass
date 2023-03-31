@@ -25,16 +25,36 @@ interface PlaguePillarProps {
   orbitalsEnabled: boolean;
 }
 
-// const randProjects = projects.sort(() => Math.random() - 0.5);
+const randProjects = projects.sort(() => Math.random() - 0.5);
+
+//split randProjects into multiple arrays of length 4
+const projectChunks = randProjects.reduce(
+  (acc, val, i) => {
+    if (i % 4 === 0) { //start a new chunk
+      console.log("pushing")
+      console.log(val)
+      acc.push([val]);
+    } else { //push the current project into the last chunk
+      acc[acc.length - 1].push(val);
+    }
+    return acc;
+  },
+  [] as Array<Array<typeof randProjects[number]>>
+);
+
+console.log(projectChunks)
+
 
 const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(
     TextureLoader,
-    projects.map((project) => project.asset)
+    projectChunks[0].map((project) => project.asset)
   );
   const { size, camera } = useThree();
   const [descriptionShown, setDescriptionShown] = useState<number>();
+  const [currentChunk, setCurrentChunk] = useState(0);
+  const turnCountRef = useRef(0);
 
   // Scale the pillar based on the window size
   let scale =
@@ -46,8 +66,20 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     //TODO: look into drei HTML ele
-    window.location.href = projects[index].link;
+    window.location.href = projectChunks[currentChunk][index].link;
   };
+
+  useEffect(() => {
+    turnCountRef.current += 1;
+    if (turnCountRef.current === 4) {
+      turnCountRef.current = 0;
+      if (currentChunk === projectChunks.length - 1) {
+        setCurrentChunk(0);
+      } else {
+        setCurrentChunk(currentChunk + 1);
+      }
+    }
+  }, [descriptionShown])
 
   // Define the anchor points for each pillar
   const anchorPoints: AnchorPoint[] | [] = [
@@ -158,7 +190,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
               anchorY="middle"
               font="/IBMPlexMono-Medium.ttf"
             >
-              ← {projects[index].name}{" "}
+              ← {projectChunks[currentChunk][index].name}{" "}
             </Text>
           )}
         </Fragment>

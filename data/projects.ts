@@ -21,6 +21,26 @@ export const projects = [
         asset: '/project-assets/rumschmarrn.webp',
         link: 'https://www.rumschmarrn.com/'
     },
+    {
+        name: 'Kunsthaus',
+        asset: '/project-assets/rumschmarrn.webp',
+        link: 'https://www.kunsthaus.at/'
+    },
+    {
+        name: 'Rumschmarrn',
+        asset: '/project-assets/rumschmarrn.webp',
+        link: 'https://www.rumschmarrn.com/'
+    },
+    {
+        name: 'Kunsthaus',
+        asset: '/project-assets/rumschmarrn.webp',
+        link: 'https://www.kunsthaus.at/'
+    },
+    {
+        name: 'Kunsthaus',
+        asset: '/project-assets/rumschmarrn.webp',
+        link: 'https://www.kunsthaus.at/'
+    },
 ]
 
 export const ProjectSchema = z.object({
