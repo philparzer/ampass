@@ -23,9 +23,6 @@ export default function ApplyForm() {
     else setValid(false);
   };
 
-
-    
-
   const apply = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the form from submitting in the default way
 
@@ -42,8 +39,6 @@ export default function ApplyForm() {
       },
       method: "POST",
     });
-
-
 
     if (res.status === 200) {
       setEmail("");
@@ -80,7 +75,7 @@ export default function ApplyForm() {
           </button>
           </div>
           {valid === false && <p className="text-scorch-500">keine gültige E-Mail</p>}
-          {status === Status.accepted ? <p className="text-lagoon-500">Wir haben deine Mail erhalten!</p>
+          {status === Status.accepted ? <p className="text-lagoon-500">Wir melden uns!</p>
           : status === Status.rejected ? <p className="text-scorch-500">Fehler :{"("}</p>
           : status === Status.pending ? <p className="opacity-50">Warte kurz...</p>
           : null  
