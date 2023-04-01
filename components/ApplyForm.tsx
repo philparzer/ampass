@@ -59,15 +59,16 @@ export default function ApplyForm() {
             type="email"
             value={email}
             required
+            disabled={status === Status.accepted}
             onChange={(e) => validateEmail(e.target.value)}
-            className="w-full max-w-[300px] md:max-w-none md:w-[400px] h-[50px] appearance-none transition-all bg-white bg-opacity-20 backdrop-blur-sm !font-body border border-white rounded-[10px] p-4 text-lg focus:outline-lagoon-500"
+            className="w-full disabled:cursor-not-allowed max-w-[300px] md:max-w-none md:w-[400px] h-[50px] appearance-none transition-all bg-white bg-opacity-20 backdrop-blur-sm !font-body border border-white rounded-[10px] p-4 text-lg focus:outline-lagoon-500"
           ></input>
         </div>
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
           <div>
           <button
             disabled={valid === undefined ? false : status === Status.accepted ? true : !valid}
-            className="font-display disabled:opacity-20 font-var-heading p-1.5 px-2 bg-scorch-500 hover:bg-scorch-300 rounded-[5px]"
+            className="font-display disabled:opacity-20 font-var-heading p-1.5 px-2 bg-scorch-500 disabled:hover:bg-scorch-500 disabled:cursor-not-allowed hover:bg-scorch-300 rounded-[5px]"
             type={"submit"}
           >
             ANMELDEN

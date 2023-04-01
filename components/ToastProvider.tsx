@@ -9,7 +9,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 
 interface Props {
-    message: React.ReactNode;
+  message: React.ReactNode;
 }
 
 export default function ToastProvider({message}: Props) {
