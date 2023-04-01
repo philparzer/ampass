@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState, useRef, useEffect, Suspense } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useLoader, useThree, useFrame } from "@react-three/fiber";
@@ -45,13 +45,13 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
       Math.min(window.innerWidth, window.innerHeight)) *
     0.4;
 
-  // Handles clicking on a pillar
+  // Handles clicking on a project and navigates to its page
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
   };
   
-  // Handles scrolling on the pillar and updates the currently visible projects
+  // Handles spinning the pillar and updates the currently visible projects
   useEffect(() => {
     turnCountRef.current += 1;
   
@@ -83,7 +83,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   
   
 
-  // Define the anchor points for each pillar
+  // Define the anchor points for each side of the pillar
   const anchorPoints: AnchorPoint[] | [] = [
     { position: [0, 1.8, 0.8], rotation: [0, 0, 0] },
     { position: [0.8, 1.8, 0], rotation: [0, degToRad(90), 0] },
