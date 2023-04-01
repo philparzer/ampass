@@ -28,6 +28,8 @@ interface PlaguePillarProps {
 const randProjects = projects.sort(() => Math.random() - 0.5);
 
 
+
+
 const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(
