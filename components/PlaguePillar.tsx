@@ -27,33 +27,16 @@ interface PlaguePillarProps {
 
 const randProjects = projects.sort(() => Math.random() - 0.5);
 
-//split randProjects into multiple arrays of length 4
-const projectChunks = randProjects.reduce(
-  (acc, val, i) => {
-    if (i % 4 === 0) { //start a new chunk
-      console.log("pushing")
-      console.log(val)
-      acc.push([val]);
-    } else { //push the current project into the last chunk
-      acc[acc.length - 1].push(val);
-    }
-    return acc;
-  },
-  [] as Array<Array<typeof randProjects[number]>>
-);
-
-console.log(projectChunks)
-
 
 const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(
     TextureLoader,
-    projectChunks[0].map((project) => project.asset)
+    randProjects.map((project) => project.asset)
   );
   const { size, camera } = useThree();
-  const [descriptionShown, setDescriptionShown] = useState<number>();
-  const [currentChunk, setCurrentChunk] = useState(0);
+  const [descriptionShown, setDescriptionShown] = useState<number>(0);
+  const [currentlyVisible, setCurrentlyVisible] = useState([0, 1, 2, 3]);
   const turnCountRef = useRef(0);
 
   // Scale the pillar based on the window size
@@ -65,21 +48,40 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   // Handles clicking on a pillar
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
-    //TODO: look into drei HTML ele
-    window.location.href = projectChunks[currentChunk][index].link;
+    window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
   };
-
+  
+  // Handles scrolling on the pillar and updates the currently visible projects
   useEffect(() => {
     turnCountRef.current += 1;
-    if (turnCountRef.current === 4) {
+  
+    if (turnCountRef.current > 3) {
+      console.log("spun round");
       turnCountRef.current = 0;
-      if (currentChunk === projectChunks.length - 1) {
-        setCurrentChunk(0);
-      } else {
-        setCurrentChunk(currentChunk + 1);
+  
+      // Calculate the start and end indices for the next set of projects
+      const startIdx = (currentlyVisible[currentlyVisible.length - 1] + 1) % randProjects.length;
+      const endIdx = (startIdx + 4) % randProjects.length;
+  
+      // Get the next 4 project indices, wrapping around if necessary
+      let newCurrentlyVisible;
+      if (endIdx > startIdx) { // no wraparound
+        newCurrentlyVisible = Array.from({ length: 4 }, (_, i) => (startIdx + i) % randProjects.length);
+        console.log(newCurrentlyVisible)
+      } else { // wraparound
+        newCurrentlyVisible = [
+          ...Array.from({ length: randProjects.length - startIdx }, (_, i) => startIdx + i),
+          ...Array.from({ length: endIdx }, (_, i) => i),
+        ];
+        console.log(newCurrentlyVisible)
       }
+  
+      // Update the currently visible projects' indices
+      setCurrentlyVisible(newCurrentlyVisible);
     }
-  }, [descriptionShown])
+  }, [descriptionShown]);
+  
+  
 
   // Define the anchor points for each pillar
   const anchorPoints: AnchorPoint[] | [] = [
@@ -101,15 +103,15 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
       camera.position.z - groupRef.current.position.z
     );
 
-    if (azimuthAngle >= -1 && azimuthAngle <= 0.9) {
+    if (azimuthAngle >= -1 && azimuthAngle < 0.4) {
       if (descriptionShown !== 0) {
         setDescriptionShown(0);
       }
-    } else if (azimuthAngle >= 0.8 && azimuthAngle <= 2.1) {
+    } else if (azimuthAngle >= 0.4 && azimuthAngle < 2) {
       if (descriptionShown !== 1) {
         setDescriptionShown(1);
       }
-    } else if (azimuthAngle >= 2.2 || azimuthAngle <= -2.3) {
+    } else if (azimuthAngle >= 2 || azimuthAngle <= -2.8) {
       if (descriptionShown !== 2) {
         setDescriptionShown(2);
       }
@@ -140,8 +142,8 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
       <pointLight position={[10, 10, 10]} intensity={0.4} />
       <pointLight position={[-10, 10, -10]} intensity={0.4} />
       <primitive object={gltf.scene} />
-      {textures.map((texture, index) => (
-        <Fragment key={index}>
+      {currentlyVisible.map((projectIndex, index) => (
+        <Fragment key={Math.random()}>
           {/* Create a mesh for each pillar */}
           <mesh
             position={anchorPoints[index].position}
@@ -156,7 +158,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
           >
             <planeBufferGeometry args={[1, 1]} />
             <meshBasicMaterial
-              map={texture}
+              map={textures[currentlyVisible[index]]}
               color="#B3B3B3"
               transparent
             ></meshBasicMaterial>
@@ -190,7 +192,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
               anchorY="middle"
               font="/IBMPlexMono-Medium.ttf"
             >
-              ← {projectChunks[currentChunk][index].name}{" "}
+              ← {randProjects[currentlyVisible[descriptionShown]].name}{" "}
             </Text>
           )}
         </Fragment>
