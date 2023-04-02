@@ -31,6 +31,7 @@ const randProjects = projects.sort(() => Math.random() - 0.5);
 
 
 const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
+  
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
   const textures = useLoader(
     TextureLoader,
@@ -50,6 +51,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   // Handles clicking on a project and navigates to its page
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
+    console.log("clicked on project", index);
     window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
   };
   
@@ -58,7 +60,6 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
     turnCountRef.current += 1;
   
     if (turnCountRef.current > 3) {
-      console.log("spun round");
       turnCountRef.current = 0;
   
       // Calculate the start and end indices for the next set of projects
@@ -69,13 +70,11 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
       let newCurrentlyVisible;
       if (endIdx > startIdx) { // no wraparound
         newCurrentlyVisible = Array.from({ length: 4 }, (_, i) => (startIdx + i) % randProjects.length);
-        console.log(newCurrentlyVisible)
       } else { // wraparound
         newCurrentlyVisible = [
           ...Array.from({ length: randProjects.length - startIdx }, (_, i) => startIdx + i),
           ...Array.from({ length: endIdx }, (_, i) => i),
         ];
-        console.log(newCurrentlyVisible)
       }
   
       // Update the currently visible projects' indices
@@ -148,9 +147,10 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
         <Fragment key={Math.random()}>
           {/* Create a mesh for each pillar */}
           <mesh
+            userData={{id: "pillar"}}
             position={anchorPoints[index].position}
             rotation={anchorPoints[index].rotation}
-            onClick={(event) => handleClick(event, index)}
+            onPointerDown={(event) => handleClick(event, index)}
             onPointerOver={() => {
               document.body.style.cursor = "pointer";
             }}
@@ -178,7 +178,8 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
                 anchorPoints[index].rotation[1],
                 degToRad(-90),
               ]}
-              onClick={(event) => handleClick(event, index)}
+              
+              onPointerDown={(event) => handleClick(event, index)}
               onPointerOver={() => {
                 document.body.style.cursor = "pointer";
               }}
@@ -216,16 +217,20 @@ const PlagueCanvas = () => {
   // Track the initial touch coordinates
   const [initialTouch, setInitialTouch] = useState({ x: 0, y: 0 });
 
+
+
   // Whether or not the canvas is currently being scrolled
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
     const handleTouchStart = (event: TouchEvent) => {
       // Set the initial touch coordinates on touch start
+
       setInitialTouch({
         x: event.touches[0].clientX,
         y: event.touches[0].clientY,
       });
+
     };
 
     const handleTouchMove = (event: TouchEvent) => {
@@ -234,12 +239,14 @@ const PlagueCanvas = () => {
         x: event.touches[0].clientX,
         y: event.touches[0].clientY,
       };
+
       const deltaX = Math.abs(currentTouch.x - initialTouch.x);
       const deltaY = Math.abs(currentTouch.y - initialTouch.y);
+      
 
       // If the delta in the X direction is greater than the delta in the Y direction,
       // treat it as a horizontal scroll and disable canvas scrolling
-      if (deltaX + threshold > deltaY) {
+      if (deltaX + threshold > deltaY ) {
         setScrolling(false); // horizontal scroll, use OrbitControls
       } else {
         // Get the top and bottom coordinates of the canvas element
