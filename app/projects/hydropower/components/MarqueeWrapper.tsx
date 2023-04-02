@@ -16,8 +16,8 @@ export default function MarqueeWrapper({ content, multiplicator }:Props) {
             <Marquee gradient={false} speed={20} className="relative">
                 <div className="flex gap-[20px] text-[65px] font-display font-var-heading text-[#FBFF28] relative z-10 uppercase pr-[60px]">
                     {Array(multiplicator).fill(content).map((content, index) => 
-                    <div className="flex gap-[20px]">
-                        <p key={index}>{content}</p>
+                    <div  key={index} className="flex gap-[20px]">
+                        <p >{content}</p>
                         <div className="flex w-[100px] relative">
                         <Image src="/images/hydropower/drop.webp" fill alt={"water drop emoji"} className="object-scale-down"/>
                         </div>
