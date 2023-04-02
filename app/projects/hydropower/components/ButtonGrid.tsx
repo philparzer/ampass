@@ -1,7 +1,7 @@
 export default function ButtonGrid() {
     return (
         <>
-            <svg width="807" height="416" viewBox="0 0 807 416" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="md:-translate-x-[20vw] 2xl:translate-x-0 md:w-[807px]" viewBox="0 0 807 416" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d_104_5)">
 <rect x="4.6731" y="0.484924" width="798.079" height="406.892" rx="5" fill="#5A6C51"/>
 <rect x="7.1731" y="2.98492" width="793.079" height="401.892" rx="2.5" stroke="#5A6C51" stroke-width="5"/>
