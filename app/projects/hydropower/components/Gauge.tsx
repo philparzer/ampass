@@ -1,8 +1,19 @@
-interface Props {
+"use client"
 
-}
+import { useEffect, useState } from "react";
 
-export default function Gauge({  }:Props) {
+export default function Gauge() {
+
+  const [needleRotation, setNeedleRotation] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNeedleRotation(Math.random() > 0.5 ? needleRotation - 50 * Math.random() : needleRotation + 50 * Math.random());
+    }, 500);
+    return () => clearInterval(interval);
+  }, [needleRotation]);
+
+
     return (
         <svg
           width="326"
@@ -40,6 +51,7 @@ export default function Gauge({  }:Props) {
             />
           </g>
           <path //TODO: spin
+            className="origin-center" style={{transform: `rotate(${needleRotation}deg)`, transition: "all 0.5s ease-out;"}}
             d="M53.0252 257.588C52.3808 256.742 52.4927 255.544 53.2825 254.832L204.752 118.324L210.551 125.933L55.9768 257.903C55.0848 258.665 53.7362 258.521 53.0252 257.588Z"
             fill="black"
           />
