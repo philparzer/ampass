@@ -7,9 +7,7 @@ export default function Home() {
   return (
     <main className=" bg-black flex w-full relative flex-col overflow-x-hidden font-body">
       <div className="min-h-[100vh] flex relative">
-        
           <PlaguePillar />
-        
       </div>
       <div className="min-h-[90vh] relative flex flex-col">
         <section className="flex justify-center grow items-center mb-40 px-[5vw]">
@@ -17,7 +15,6 @@ export default function Home() {
         </section>
         <Footer />
       </div>
-      
     </main>
   )
 }
