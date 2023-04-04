@@ -77,7 +77,7 @@ export default function Hydropower() {
         <ToastProvider
         message={
           <>
-            Seit ca. 1930 existiert in Ampass ein privat geführtes <span className="text-lagoon-500">Wasserkraftwerk</span> für die Gemeinde Ampass. Heute wird es von <span className="text-white underline">Hansjörg Steixner</span> betrieben..
+            Seit ca. 1930 existiert in Ampass ein privat geführtes <span className="text-lagoon-500">Wasserkraftwerk</span> für die Gemeinde Ampass. Heute wird es von <span className="text-white underline">Hansjörg Steixner</span> betrieben.
           </>
         }
       />
