@@ -1,7 +1,6 @@
 import PlaguePillar from "@/components/PlaguePillar";
 import Footer from "@/components/Footer";
 import ApplyForm from "@/components/ApplyForm";
-import Loading from "./loading"
 
 export default function Home() {
 
