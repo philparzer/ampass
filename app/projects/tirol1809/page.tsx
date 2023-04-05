@@ -50,7 +50,7 @@ export default function Tirol1809() {
           <div className="flex flex-col mt-14 items-center">
             <div className="flex flex-col gap-1">
               <a
-                href="https://www.ampass.at/"
+                href="https://www.spreadshirt.at/shop/user/tirol1809/bekleidung/t-shirts/?safesearch=0"
                 className="flex flex-col gap-1 group"
               >
                 <span className="group-hover:bg-[#231F20] group-hover:text-white">

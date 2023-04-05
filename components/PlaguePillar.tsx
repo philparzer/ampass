@@ -53,7 +53,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     console.log("clicked on project", index);
-    window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
+    window.location.href = randProjects[index].link;
   };
   
   // Handles spinning the pillar and updates the currently visible projects
