@@ -120,8 +120,8 @@ export default function Gauge() {
               y2="367.619"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#F4F5B9" />
-              <stop offset="1" stop-color="#F4F5B9" stop-opacity="0" />
+              <stop stopColor="#F4F5B9" />
+              <stop offset="1" stopColor="#F4F5B9" stop-opacity="0" />
             </linearGradient>
           </defs>
         </svg>

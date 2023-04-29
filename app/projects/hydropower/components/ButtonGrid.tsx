@@ -74,40 +74,40 @@ export default function ButtonGrid() {
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_104_5" result="shape"/>
 </filter>
 <linearGradient id="paint0_linear_104_5" x1="131.774" y1="48.5674" x2="261.948" y2="255.925" gradientUnits="userSpaceOnUse">
-<stop stop-color="#E7E0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#E7E0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint1_linear_104_5" x1="313.972" y1="48.5674" x2="444.146" y2="255.925" gradientUnits="userSpaceOnUse">
-<stop stop-color="#EEE0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#EEE0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint2_linear_104_5" x1="496.17" y1="48.5674" x2="626.344" y2="255.925" gradientUnits="userSpaceOnUse">
-<stop stop-color="#E7E0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#E7E0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint3_linear_104_5" x1="678.367" y1="48.5674" x2="808.541" y2="255.925" gradientUnits="userSpaceOnUse">
-<stop stop-color="#8F8F8F"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#8F8F8F"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint4_linear_104_5" x1="678.367" y1="48.5674" x2="808.541" y2="255.925" gradientUnits="userSpaceOnUse">
-<stop stop-color="#E7E0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#E7E0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint5_linear_104_5" x1="678.367" y1="231.662" x2="808.541" y2="439.02" gradientUnits="userSpaceOnUse">
-<stop stop-color="#E7E0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#E7E0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint6_linear_104_5" x1="496.17" y1="231.662" x2="626.344" y2="439.02" gradientUnits="userSpaceOnUse">
-<stop stop-color="#8F8F8F"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#8F8F8F"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint7_linear_104_5" x1="313.972" y1="231.662" x2="444.146" y2="439.02" gradientUnits="userSpaceOnUse">
-<stop stop-color="#8F8F8F"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#8F8F8F"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 <linearGradient id="paint8_linear_104_5" x1="131.774" y1="231.662" x2="261.948" y2="439.02" gradientUnits="userSpaceOnUse">
-<stop stop-color="#E7E0E0"/>
-<stop offset="1" stop-color="#8F8F8F" stop-opacity="0"/>
+<stop stopColor="#E7E0E0"/>
+<stop offset="1" stopColor="#8F8F8F" stop-opacity="0"/>
 </linearGradient>
 </defs>
 </svg>
