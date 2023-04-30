@@ -35,7 +35,6 @@ export const metadata = {
     userScalable: false,
   },
   themeColor: "black",
-  openGraph: "/images/og.png",
 };
 
 export default function RootLayout({
