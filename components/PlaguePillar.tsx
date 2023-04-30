@@ -42,6 +42,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const [descriptionShown, setDescriptionShown] = useState<number>(0);
   const [currentlyVisible, setCurrentlyVisible] = useState([0, 1, 2, 3]);
   const turnCountRef = useRef(0);
+  const isAutoRotatingRef = useRef(true);
 
   // Scale the pillar based on the window size
   let scale =
@@ -55,6 +56,13 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
     console.log("clicked on project", index);
     window.location.href = randProjects[index].link;
   };
+
+  // Stop autorotate after 2 seconds
+  useEffect(() => {
+      setTimeout(() => {
+        isAutoRotatingRef.current = false;
+      }, 300);
+  }, [isAutoRotatingRef]);
   
   // Handles spinning the pillar and updates the currently visible projects
   useEffect(() => {
@@ -139,6 +147,8 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
         dampingFactor={0.005}
         enableDamping={true}
         enabled={!orbitalsEnabled}
+        autoRotate={isAutoRotatingRef.current}
+        autoRotateSpeed={200}
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.4} />
