@@ -2,6 +2,7 @@ import PlaguePillar from "@/components/PlaguePillar";
 import Footer from "@/components/Footer";
 import ApplyForm from "@/components/ApplyForm";
 import CircularText from "@/components/CircularText";
+import About from "@/components/About";
 
 export default function Home() {
 
@@ -20,10 +21,19 @@ export default function Home() {
           <ApplyForm />
         </section>
       </div>
+      <div className="min-h-[90vh] relative flex flex-col">
       <section className="flex justify-center grow items-center px-[5vw]">
         <CircularText />
       </section>
-      <section className="mt-40"><Footer /></section>
+      </div>
+      <div className="min-h-[90vh] relative flex flex-col mt-40">
+      <section className="flex justify-center grow items-center px-[5vw]">
+        <About />
+      </section>
+      </div>
+      <section className="mt-40">
+      <Footer />
+      </section>
     </main>
   )
 }
