@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const projects = [
     {
-        name: 'hydropower by miller',
+        name: 'Hydropower',
         asset: '/project-assets/hydropower.webp',
         link: '/projects/hydropower'
     },

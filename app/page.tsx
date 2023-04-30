@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ApplyForm from "@/components/ApplyForm";
 import CircularText from "@/components/CircularText";
 import About from "@/components/About";
+import Projects from "@/components/Projects";
 
 export default function Home() {
 
@@ -29,6 +30,11 @@ export default function Home() {
       <div className="min-h-[90vh] relative flex flex-col mt-40">
       <section className="flex justify-center grow items-center px-[5vw]">
         <About />
+      </section>
+      </div>
+      <div className="lg:min-h-[90vh] relative flex flex-col mt-40">
+      <section className="flex justify-center grow items-center px-[5vw]">
+        <Projects />
       </section>
       </div>
       <section className="mt-40">

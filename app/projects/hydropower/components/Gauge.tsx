@@ -121,7 +121,7 @@ export default function Gauge() {
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#F4F5B9" />
-              <stop offset="1" stopColor="#F4F5B9" stop-opacity="0" />
+              <stop offset="1" stopColor="#F4F5B9" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>

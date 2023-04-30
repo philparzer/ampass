@@ -9,7 +9,7 @@ const CircularText = () => {
                         <radialGradient id="paint0_radial_148_10" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(17.3313 395.911) rotate(-39.1836) scale(495.404)">
                             <stop stopColor="#4200FF" />
                             <stop offset="0.567708" stopColor="#00A3FF" />
-                            <stop offset="1" stopColor="#8F8F8F" stop-opacity="0.1" />
+                            <stop offset="1" stopColor="#8F8F8F" stopOpacity="0.1" />
                         </radialGradient>
                     </defs>
                 </svg>
