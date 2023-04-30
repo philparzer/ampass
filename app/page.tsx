@@ -23,22 +23,22 @@ export default function Home() {
         </section>
       </div>
       <div className="min-h-[90vh] relative flex flex-col">
-      <section className="flex justify-center grow items-center px-[5vw]">
-        <CircularText />
-      </section>
+        <section className="flex justify-center grow items-center px-[5vw]">
+          <CircularText />
+        </section>
       </div>
       <div className="min-h-[90vh] relative flex flex-col mt-40">
-      <section className="flex justify-center grow items-center px-[5vw]">
-        <About />
-      </section>
+        <section className="flex justify-center grow items-center px-[5vw]">
+          <About />
+        </section>
       </div>
       <div className="lg:min-h-[90vh] relative flex flex-col mt-40">
-      <section className="flex justify-center grow items-center px-[5vw]">
-        <Projects />
-      </section>
+        <section className="flex justify-center grow items-center px-[5vw]">
+          <Projects />
+        </section>
       </div>
       <section className="mt-40">
-      <Footer />
+        <Footer />
       </section>
     </main>
   )
