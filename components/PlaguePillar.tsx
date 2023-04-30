@@ -61,7 +61,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   useEffect(() => {
       setTimeout(() => {
         isAutoRotatingRef.current = false;
-      }, 300);
+      }, 50);
   }, [isAutoRotatingRef]);
   
   // Handles spinning the pillar and updates the currently visible projects
@@ -148,7 +148,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
         enableDamping={true}
         enabled={!orbitalsEnabled}
         autoRotate={isAutoRotatingRef.current}
-        autoRotateSpeed={200}
+        autoRotateSpeed={5}
       />
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={0.4} />
@@ -316,8 +316,10 @@ const PlagueCanvas = () => {
         transition={{ delay: 0.2, duration: 0.8, ease: "easeIn" }}
         animate={{ opacity: 1 }}
       >
+        <Suspense fallback={<>lädt...</>}>
         <Canvas
-          className="relative z-10 -translate-y-[7vh] -translate-x-[3vw] md:translate-x-0 md:translate-y-0 select-none"
+          title={"dreh mich"}
+          className="relative z-10 -translate-y-[7vh] cursor-move -translate-x-[3vw] md:translate-x-0 md:translate-y-0 select-none"
           style={{
             pointerEvents: scrolling ? "none" : "auto",
             touchAction: scrolling ? "none" : "auto",
@@ -327,6 +329,7 @@ const PlagueCanvas = () => {
           <PlaguePillar orbitalsEnabled={scrolling} />
           </Suspense>
         </Canvas>  
+        </Suspense>
       </motion.div>
       
     </div>
