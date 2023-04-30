@@ -24,7 +24,7 @@ const CircularText = () => {
                         Anmelden kann sich jeder.
                     </p>
                     <p>
-                        Mit der <a href="https://www.ampass.tirol.gv.at/" target="_blank" rel="noopener noreferrer" className="underline hover:text-lagoon-300"> Gemeinde Ampass </a> hats tatsächlich nichts zu tun
+                        Mit der <a href="https://www.ampass.tirol.gv.at/" target="_blank" rel="noopener noreferrer" className="underline hover:text-lagoon-300"> Gemeinde Ampass</a>  hats tatsächlich nichts zu tun
                     </p>
                     </div>
                 </div>
