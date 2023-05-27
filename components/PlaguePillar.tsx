@@ -28,9 +28,6 @@ interface PlaguePillarProps {
 
 const randProjects = projects.sort(() => Math.random() - 0.5);
 
-
-
-
 const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   
   const gltf = useLoader(GLTFLoader, "models/pillar.glb");
@@ -54,7 +51,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     console.log("clicked on project", index);
-    window.location.href = randProjects[index].link;
+    window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
   };
 
   // Stop autorotate after 2 seconds
@@ -319,7 +316,7 @@ const PlagueCanvas = () => {
         <Suspense fallback={<>lädt...</>}>
         <Canvas
           title={"dreh mich"}
-          className="relative z-10 -translate-y-[7vh] cursor-move -translate-x-[3vw] md:translate-x-0 md:translate-y-0 select-none"
+          className="relative z-10 -translate-y-[7vh] -translate-x-[3vw] md:translate-x-0 md:translate-y-0 select-none"
           style={{
             pointerEvents: scrolling ? "none" : "auto",
             touchAction: scrolling ? "none" : "auto",

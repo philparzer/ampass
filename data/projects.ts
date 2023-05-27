@@ -21,6 +21,11 @@ export const projects = [
         asset: '/project-assets/rumschmarrn.webp',
         link: 'https://www.rumschmarrn.com/'
     },
+    {
+        name: 'BADFILE.ZIP',
+        asset: '/project-assets/badfile.webp',
+        link: 'https://badfile.zip'
+    }
 ]
 
 export const ProjectSchema = z.object({

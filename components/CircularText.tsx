@@ -14,7 +14,12 @@ const CircularText = () => {
                     </defs>
                 </svg>
 
+                <div className="absolute top-20 right-5 rounded-full w-20 h-20 opacity-50 backdrop-blur-xl fall-anim-3"/>
+                <div className="absolute bottom-40 z-20 left-40 rounded-full w-10 h-10 opacity-80 backdrop-blur-xl fall-anim-2"/>
+                
+
                 <div className="px-[20%] pt-[20%] relative z-10">
+                    <div className="absolute top-[45%] rounded-full w-5 h-5 blur-xl opacity-80 backdrop-blur-sm fall-anim"/>
                     <h2 className="text-[60px] font-display font-var-heading tracking-tight ">HÄ?</h2>
                     <div className="flex flex-col gap-4 max-w-[60%]">
                     <p>

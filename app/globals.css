@@ -159,3 +159,62 @@
 .Toastify__close-button:hover,
 .Toastify__close-button:focus {
 }
+
+.fall-anim {
+    animation: fall 5s ease ease-in-out infinite;
+}
+
+.fall-anim-2 {
+    animation: fall-2 7s ease forwards infinite;
+}
+
+.fall-anim-3 {
+    animation: fall-3 5s ease ease-in-out infinite;
+}
+
+@keyframes fall-2 {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(60px);
+    }
+    0% {
+        transform: translateY(0);
+        transform: transalatX(0);
+    }
+}
+
+@keyframes fall-3 {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translatex(35px);
+    }
+    75% {
+        transform: translateY(16px);
+        transform: translateX(-20px);
+    }
+    0% {
+        transform: translateY(0);
+        transform: transalatX(0);
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translatex(-15px);
+    }
+    100% {
+        transform: translateY(50px);
+        transform: translateX(15px);
+    }
+    0% {
+        transform: translateY(0);
+        transform: transalatX(0);
+    }
+}
