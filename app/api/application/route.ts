@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       from: 'Ampass <hi@ampass.at>',
       to: [email],
       subject: 'Hi',
-      html: '<strong>We will get back to you in no time.</strong>'
+      html: 'Wir melden uns bald bei dir.'
     });
   } catch (error) {
     return new Response ("resend error", {status: 500})
