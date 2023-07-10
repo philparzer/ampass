@@ -9,4 +9,4 @@ Ampass is a platform for digital art, built with:
 
 ## Contributions
 
-We're looking for to contributions, you can open a PR on here or apply using the website's form.
+We want to showcase your work. You can open a PR on here or apply via the application form on <a href="https://ampass.at">ampass.at</a>
