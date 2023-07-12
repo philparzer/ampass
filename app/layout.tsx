@@ -35,6 +35,7 @@ export const metadata = {
     userScalable: false,
   },
   themeColor: "black",
+  locale: "de_AT",
 };
 
 export default function RootLayout({
