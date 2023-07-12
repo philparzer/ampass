@@ -35,7 +35,6 @@ export const metadata = {
     userScalable: false,
   },
   themeColor: "black",
-  locale: "de_AT",
 };
 
 export default function RootLayout({
@@ -45,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="de"
       className={`${display.variable} ${body.variable} font-sans selection:bg-lagoon`}
     >
       <body className="bg-black relative">
