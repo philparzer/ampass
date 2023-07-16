@@ -1,6 +1,11 @@
 
 import UtilityPageWrapper from "@/components/UtilityPageWrapper"
 
+export const metadata = {
+  title: "Ampass · Impressum",
+  description: "Impressum der Website ampass.at",
+};
+
 export default function Imprint() {
   return (
     <UtilityPageWrapper>

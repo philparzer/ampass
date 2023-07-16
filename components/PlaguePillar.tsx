@@ -51,7 +51,7 @@ const PlaguePillar = ({ orbitalsEnabled }: PlaguePillarProps) => {
   const handleClick = (event: ThreeEvent<MouseEvent>, index: number) => {
     event.stopPropagation();
     console.log("clicked on project", index);
-    window.location.href = randProjects[currentlyVisible[descriptionShown]].link;
+    window.open(randProjects[currentlyVisible[descriptionShown]].link, "_blank");
   };
 
   // Stop autorotate after 2 seconds

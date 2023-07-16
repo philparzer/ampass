@@ -9,6 +9,11 @@ import AttentionSign from "./components/AttentionSign";
 import ButtonGrid from "./components/ButtonGrid";
 import Image from "next/image";
 
+export const metadata = {
+  title: "Ampass · Hydropower",
+  description: "Seit ca. 1930 existiert in Ampass ein privat geführtes Wasserkraftwerk für die Gemeinde Ampass. Heute wird es von Hansjörg Steixner betrieben.",
+};
+
 const myFont = localFont({
   src: "./DSEG14Classic-Bold.woff2",
   display: "swap",

@@ -1,6 +1,11 @@
 import StackedLines from "@/components/StackedLines";
 import ToastProvider from "@/components/ToastProvider";
 
+export const metadata = {
+  title: "Ampass · Tirol1809",
+  description: "Tirol1809 erinnert an den Jahrestag der Schlacht am Bergisel. Hansjörg Steixner lässt eine minimalistische Darstellung Andreas Hofers anfertigen.",
+};
+
 export default function Tirol1809() {
   return (
     <main className="relative min-h-screen bg-[#F6F0F0] flex justify-center items-center font-body text-[#231F20]">

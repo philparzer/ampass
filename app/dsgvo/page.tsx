@@ -1,6 +1,11 @@
 
 import UtilityPageWrapper from "@/components/UtilityPageWrapper"
 
+export const metadata = {
+  title: "Ampass · DSGVO",
+  description: "Erklärung zur Datenschutzgrundverordnung bzw GDPR",
+};
+
 export default function DSGVO() {
   return (
     <UtilityPageWrapper>
