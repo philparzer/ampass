@@ -27,7 +27,7 @@ const body = Body({
 
 export const metadata = {
   title: "Ampass · Digitale Kunstplattform",
-  description: "Da, wo digitale Künstler*innen ihr Geschäft verrichten. Ein Kunstprojekt im Tiroler Web, die Gemeinde Ampass hat damit nichts zu tun.",
+  description: "Da, wo digitale Künstler*innen rund um Tirol ihr Geschäft verrichten. Ein Kunstprojekt im Tiroler Web, die Gemeinde Ampass hat damit nichts zu tun.",
   viewport: {
     width: "device-width",
     initialScale: 1,
