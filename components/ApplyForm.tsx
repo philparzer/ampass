@@ -55,7 +55,7 @@ export default function ApplyForm() {
       <p className="opacity-50">Hast was, das dazupasst? Gib E-Mail.</p>
       <form className="flex flex-col gap-8 relative w-full mt-4" onSubmit={(e) => apply(e)}>
         <div className="relative z-10">
-          <label className="sr-only">email</label>
+          <label className="sr-only" htmlFor="email">email</label>
           <input
             id="email"
             type="email"
