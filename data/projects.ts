@@ -25,6 +25,11 @@ export const projects = [
         name: 'BADFILE.ZIP',
         asset: '/project-assets/badfile.webp',
         link: 'https://badfile.zip'
+    },
+    {
+        name: 'bbox2seg',
+        asset: '/project-assets/bbox2seg.png',
+        link: 'https://github.com/johannes-p/bbox2samgmentation'
     }
 ]
 
