@@ -7,6 +7,11 @@ export const projects = [
         link: '/projects/hydropower'
     },
     {
+        name: 'insource.dev',
+        asset: '/project-assets/insource.png',
+        link: 'https://insource.dev'
+    },
+    {
         name: 'Tirol 1809',
         asset: '/project-assets/hofer.webp',
         link: '/projects/tirol1809',
