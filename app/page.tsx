@@ -8,7 +8,7 @@ import Projects from "@/components/Projects";
 export default function Home() {
 
   return (
-    <main className=" bg-black flex w-full relative flex-col overflow-x-hidden font-body">
+    <main className=" bg-black 603595c3-e1bc-4e75-b47c-ec07a6e9e266 flex w-full relative flex-col overflow-x-hidden font-body">
       <div className="min-h-[100vh] flex relative">
         <PlaguePillar />
         <div className="absolute w-full h-full flex justify-center items-center -translate-x-[3vw] md:translate-x-0 -translate-y-[7vh] md:translate-y-0">
